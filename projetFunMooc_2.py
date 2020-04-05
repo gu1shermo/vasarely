@@ -62,6 +62,11 @@ def hexagone(point, longueur, col, centre, rayon,t,width,height,x,y):
         new_point != point
         )
     # print('is_deformed: ' + str(is_deformed))
+    print(width)
+    print(height)
+    print(x)
+    print(y)
+    print('*'*10)
     if is_deformed:
         # draw
         point = new_point
@@ -73,21 +78,44 @@ def hexagone(point, longueur, col, centre, rayon,t,width,height,x,y):
         hex6 = deformation(hex6,centre,rayon)
 
         # color
-        color0 = (1 - x/width,0,0)
-        color1 = (0,1 - y/width,0)
-        color2 = (0,0,1-(x/width + y/height)/2)
+        if x <= width / 3 :
+            # color0 = (1 - x/width,0,0)
+            # color1 = (1 - y/width,0,0)
+            # color2 = (1-(x/width + y/height)/2,0,0)
+            color0 = (x/width,x/width,0)
+            color1 = (y/height,y/height,0)
+            color2 = ((x/width+y/height)/2,(x/width+y/height)/2,0)
+        if x > width / 3 and x <= 2 * (width/3) :
+            color0 = (x/width,0,x/width)
+            color1 = (y/height,0,y/height)
+            color2 = ((x/width+y/height)/2,0,(x/width+y/height)/2)
+        if x > 2 * (width / 3) :
+            color0 = (0,x/width,x/width)
+            color1 = (0,y/height,y/height)
+            color2 = (0,(x/width+y/height)/2,(x/width+y/height)/2)
+
+        
         
     else:
-        color0 = (x/width,x/width,x/width)
-        color1 = (y/height,y/height,y/height)
-        color2 = ((x/width + y/height)/2,(x/width + y/height)/2,(x/width + y/height)/2)
-        # r0 = uniform(0.5,1)
-        # r1 = uniform(0.5,1)
-        # r2 = uniform(0.5,1)
-        # color0 = (r0,r1,r2)
-        # color1 = (r0,r1,r2)
-        # color2 = (r0,r1,r2)
-        pass
+        
+        if x <= width / 3 :
+            # color0 = (1 - x/width,0,0)
+            # color1 = (1 - y/width,0,0)
+            # color2 = (1-(x/width + y/height)/2,0,0)
+            print('x <= width/3')
+            color0 = (x/width,0,0)
+            color1 = (y/height,0,0)
+            color2 = ((x/width+y/height)/2,0,0)
+        if x > width / 3 and x <= 2 * (width/3):
+            color0 = (0,x/width,0)
+            color1 = (0,y/height,0)
+            color2 = (0,(x/width + y / height)/2,0)
+        if x > 2 * (width / 3) :
+            color0 = (0,0,x/width)
+            color1 = (0,0,y/width)
+            color2 = (0,0,(x/width+ y/height)/2)
+
+        
     
 
     
@@ -175,12 +203,12 @@ def vasarely(inf_g,sup_d,longueur,col,centre,r):
     t = turtle.Turtle()
     pavage(inf_g,sup_d,longueur,col,centre,r,t) 
     ts = t.getscreen()
-    ts.getcanvas().postscript(file="vasarely_isDeformed_gradient_grey_color_3.eps")
+    ts.getcanvas().postscript(file="vasarely_isDeformed_gradient_grey_color_5.eps")
     turtle.done()
 
 if __name__ == "__main__": # code de test
     # hexagone((200,200,0),50,('red','black','blue'),0,0) 
     # pavage(-200,200,30,('red','black','blue'),0,0)
     
-    vasarely(-150,150,10,((1,random(),random()),(1,random(),random()),(1,random(),random())),(0, 0, 0),500)
+    vasarely(-150,150,10,((1,random(),random()),(1,random(),random()),(1,random(),random())),(0, 0, 0),125)
     
